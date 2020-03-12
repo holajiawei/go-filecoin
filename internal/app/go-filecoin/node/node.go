@@ -274,7 +274,6 @@ func (node *Node) handleNewChainHeads(ctx context.Context, prevHead block.TipSet
 				log.Warn("non-tipset published on heaviest tipset channel")
 				continue
 			}
-
 			if err := handler.HandleNewHead(ctx, newHead); err != nil {
 				log.Error(err)
 			}
@@ -466,25 +465,25 @@ func (node *Node) setupStorageMining(ctx context.Context) error {
 		return err
 	}
 
-	node.StorageProtocol, err = submodule.NewStorageProtocolSubmodule(
-		ctx,
-		minerAddr,
-		address.Undef, // TODO: This is for setting up mining, we need to pass the client address in if this is going to be a storage client also
-		&node.chain,
-		&node.Messaging,
-		waiter,
-		node.StorageMining.PieceManager,
-		node.Wallet.Wallet,
-		node.Host(),
-		node.Repo.Datastore(),
-		node.Blockstore.Blockstore,
-		node.network.GraphExchange,
-		repoPath,
-		sectorBuilder.SealProofType(),
-	)
-	if err != nil {
-		return errors.Wrap(err, "error initializing storage protocol")
-	}
+	//node.StorageProtocol, err = submodule.NewStorageProtocolSubmodule(
+	//	ctx,
+	//	minerAddr,
+	//	address.Undef, // TODO: This is for setting up mining, we need to pass the client address in if this is going to be a storage client also
+	//	&node.chain,
+	//	&node.Messaging,
+	//	waiter,
+	//	node.StorageMining.PieceManager,
+	//	node.Wallet.Wallet,
+	//	node.Host(),
+	//	node.Repo.Datastore(),
+	//	node.Blockstore.Blockstore,
+	//	node.network.GraphExchange,
+	//	repoPath,
+	//	sectorBuilder.SealProofType(),
+	//)
+	//if err != nil {
+	//	return errors.Wrap(err, "error initializing storage protocol")
+	//}
 
 	return nil
 }
